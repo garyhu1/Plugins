@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>拖拽</title>
+		<style>
+			div {
+				width: 100px;
+				height: 100px;
+				border-radius: 50%;
+				position: absolute;
+			}
+		</style>
+	</head>
+
+	<body>
+		点击
+		<div id="box"></div>
+	</body>
+	<script>
+		class Pen {
+			constructor() {
+				document.onmousedown = this.down.bind(this);
+			}
+			down() {
+				document.onmousemove = this.move.bind(this);
+				document.onmouseup = this.up.bind(this);
+			}
+			move(e) {
+				var e = e || event;
+				var div = document.getElementById("box");
+				div.style.cssText = "left:" + e.clientX + "px; top:" + e.clientY + "px;";
+				div.style.background = "blue";
+			}
+			up() {
+				document.onmousemove = null;
+				document.onmouseup = null;
+			}
+		}
+
+		new Pen();
+	</script>
+
+</html>
