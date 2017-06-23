@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul {
+				list-style: none;
+				display: flex;
+				flex-direction: row;
+				width: 320px;
+			}
+			ul li {
+				width: 100px;
+				height: 40px;
+				margin: 50px auto;
+				position: relative;
+				overflow: hidden;
+			}
+			li span {
+				width: 100px;
+				height: 40px;
+				line-height: 40px;
+				background: #FADBA5;
+				display: block;
+				text-align: center;
+				cursor: pointer;
+			}
+			
+			.step2 {
+				background: #FABF55;
+			}
+			
+			.step3 {
+				width: 120px;
+				border-bottom-right-radius: 5px;
+				border-top-right-radius: 5px;
+			}
+			
+			.step1 {
+				border-bottom-left-radius: 5px;
+				border-top-left-radius: 5px;
+			}
+			
+			.step3 span {
+				width: 120px;
+			}
+			
+			li b{
+				position: absolute;
+			}
+			
+			.b-1 {
+				border-width: 22px;
+				border-style: dashed dashed dashed solid;
+				border-color: transparent transparent transparent #EEC16E;
+				left: 0px; 
+				top: -1px;
+			}
+			.b-2 {
+				border-width: 22px;
+				border-style: dashed dashed dashed solid;
+				border-color: transparent transparent transparent grey;
+				left: -1px; 
+				top: -1px;
+			}
+			.s2-2{
+				border-color: transparent transparent transparent #FADBA5;
+			}
+			.s3-2{
+				border-color: transparent transparent transparent #FABF55;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li class="step1"><span>第一步</span></li>
+			<li><span class="step2">第二步</span><b class="b-1 s2-1"></b><b class="b-2 s2-2"></b></li>
+			<li class="step3"><span>第三步</span><b class="b-1 s3-1"></b><b class="b-2 s3-2"></b></li>
+		</ul>
+	</body>
+</html>

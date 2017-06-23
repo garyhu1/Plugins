@@ -87,8 +87,9 @@
 				this.left = left;
 				this.top = top;
 			}
+			
 			$(".item_content .item").each(function(i) {
-				this.init = function() { // 初始化
+				    this.init = function() { // 初始化
 						this.box = $(this).parent();
 						$(this).attr("index", i).css({
 							position: "absolute",

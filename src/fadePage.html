@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>折纸</title>
+		<script type="text/javascript" src="../js/jquery.min.js" ></script>
+		<style>
+			body {
+				background-color: #77EEDF;
+				height: 100vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			/* Paper Sheet */
+			
+			h1.flag {
+				white-space: nowrap;
+				font-size: 2vw;
+				position: relative;
+				cursor: default
+				/* Paper Shadow */
+				/* Each letter */
+				/* Hover interaction */
+			}
+			
+			h1.flag::before {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				background-color: rgb(60, 119, 112);
+				width: 89%;
+				left: 4%;
+				height: 40%;
+				-webkit-filter: blur(2vw);
+				filter: blur(2vw);
+				-webkit-transition: all 200ms cubic-bezier(0.0, 0.0, 0.2, 1);
+				transition: all 200ms cubic-bezier(0.0, 0.0, 0.2, 1);
+			}
+			
+			h1.flag span {
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				display: inline-block;
+				width: 3em;
+				padding-top: 0.8em;
+				padding-bottom: 0.8em;
+				text-align: center;
+				position: relative;
+				z-index: 1;
+				-webkit-transition: all 1s cubic-bezier(0.0, 0.0, 0.2, 1);
+				transition: all 1s cubic-bezier(0.0, 0.0, 0.2, 1);
+				/* Solid Surface */
+				/* Odd letters */
+				/* Even letters */
+				/* Paper border-radius */
+			}
+			
+			h1.flag span::before {
+				content: '';
+				background-color: #F9F8EF;
+				-webkit-transition: all 1s cubic-bezier(0.0, 0.0, 0.2, 1);
+				transition: all 1s cubic-bezier(0.0, 0.0, 0.2, 1);
+				opacity: 0;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				z-index: -1;
+			}
+			
+			h1.flag span:nth-child(odd) {
+				-webkit-transform: skewY(-8deg);
+				transform: skewY(-8deg);
+				color: rgb(217, 213, 200);
+				background: -webkit-linear-gradient(120deg, rgb(255, 255, 255), rgb(237, 236, 227));
+				background: linear-gradient(-30deg, rgb(255, 255, 255), rgb(237, 236, 227));
+				box-shadow: inset -1px 0 0px rgba(255, 255, 255, .3);
+				prospective: 1000px;
+			}
+			
+			h1.flag span:nth-child(even) {
+				-webkit-transform: skewY(8deg);
+				transform: skewY(8deg);
+				color: #C5BEAA;
+				background: -webkit-linear-gradient(3deg, rgb(199, 198, 191), rgb(237, 236, 227));
+				background: linear-gradient(87deg, rgb(199, 198, 191), rgb(237, 236, 227));
+				box-shadow: inset -1px 0 0px rgba(0, 0, 0, .05);
+				prospective: 1000px;
+			}
+			
+			h1.flag span:first-of-type,
+			h1.flag span:first-of-type:before {
+				border-radius: 4px 0 0 4px;
+			}
+			
+			h1.flag span:last-of-type,
+			h1.flag span:last-of-type:before {
+				border-radius: 0 4px 4px 0;
+			}
+			
+			h1.flag:hover {}
+			
+			h1.flag:hover:before {
+				opacity: 0.5;
+				filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="2" /></filter></svg>#filter');
+				-webkit-filter: blur(2px);
+				filter: blur(2px);
+				left: 1%;
+				width: 98%;
+			}
+			
+			h1.flag:hover span {
+				-webkit-transform: none;
+				transform: none;
+				color: #C5BEAA;
+				box-shadow: none;
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+				width: 3.1em;
+			}
+			
+			h1.flag:hover span::before {
+				opacity: 1;
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1 class="flag">GARYHU</h1>
+	</body>
+	<script>
+		(function($) {
+			function injector(t, splitter, klass, after) {
+				var text = t.text(),
+					a = text.split(splitter),
+					inject = '';
+				if(a.length) {
+					$(a).each(function(i, item) {
+						inject += '<span class="' + klass + (i + 1) + '" aria-hidden="true">' + item + '</span>' + after;
+					});
+					t.attr('aria-label', text)
+						.empty()
+						.append(inject)
+
+				}
+			}
+
+			var methods = {
+				init: function() {
+
+					return this.each(function() {
+						injector($(this), '', 'char', '');
+					});
+
+				},
+
+				words: function() {
+
+					return this.each(function() {
+						injector($(this), ' ', 'word', ' ');
+					});
+
+				},
+
+				lines: function() {
+
+					return this.each(function() {
+						var r = "eefec303079ad17405c889e092e105b0";
+						// Because it's hard to split a <br/> tag consistently across browsers,
+						// (*ahem* IE *ahem*), we replace all <br/> instances with an md5 hash
+						// (of the word "split").  If you're trying to use this plugin on that
+						// md5 hash string, it will fail because you're being ridiculous.
+						injector($(this).children("br").replaceWith(r).end(), r, 'line', '');
+					});
+
+				}
+			};
+
+			$.fn.lettering = function(method) {
+				// Method calling logic
+				if(method && methods[method]) {
+					return methods[method].apply(this, [].slice.call(arguments, 1));
+				} else if(method === 'letters' || !method) {
+					return methods.init.apply(this, [].slice.call(arguments, 0)); // always pass an array
+				}
+				$.error('Method ' + method + ' does not exist on jQuery.lettering');
+				return this;
+			};
+
+		})(jQuery);
+		$(document).ready(function() {
+			$(".flag").lettering();
+		});
+	</script>
+
+</html>

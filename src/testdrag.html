@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>拖拽练习</title>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<style>
+			.item_content ul {
+				list-style: none;
+			}
+			
+			.item_content ul li {
+				width: 200px;
+				height: 120px;
+				float: left;
+				margin: 10px
+			}
+			
+			.item_content {
+				width: 740px;
+				height: 460px;
+				border: 1px solid #ccc;
+				float: left;
+			}
+			
+			.item_content .item {
+				width: 200px;
+				height: 120px;
+				line-height: 120px;
+				text-align: center;
+				cursor: pointer;
+				background: #ccc;
+			}
+			
+			.item_content .item img {
+				width: 200px;
+				height: 120px;
+				border-radius: 6px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="item_container">
+			<div class="item_content">
+				<ul>
+					
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/drag.js" ></script>
+	<script>
+		var images = [
+		    'http://www.jq22.com/img/cs/500x300-1.png',
+		    'http://www.jq22.com/img/cs/500x300-2.png',
+		    'http://www.jq22.com/img/cs/500x300-3.png',
+		    'http://www.jq22.com/img/cs/500x300-4.png',
+		    'http://www.jq22.com/img/cs/500x300-9.png',
+		    'http://www.jq22.com/img/cs/500x300-5.png',
+		    'http://www.jq22.com/img/cs/500x300-6.png',
+		    'http://www.jq22.com/img/cs/500x300-7.png',
+		    'http://www.jq22.com/img/cs/500x300-8.png'
+		]
+		new Drag($(".item_content>ul"),images);
+	</script>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>悬停的按钮</title>
+		<style>
+			@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700");
+			@import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
+			@import url("https://fonts.googleapis.com/css?family=Material+Icons");
+			* {
+				box-sizing: border-box;
+			}
+			
+			html,
+			body {
+				background: #F5F5F5;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-orient: vertical;
+				-webkit-box-direction: normal;
+				-ms-flex-direction: column;
+				flex-direction: column;
+				width: 100vw;
+				height: 100vh;
+				-webkit-box-align: center;
+				-ms-flex-align: center;
+				align-items: center;
+				-webkit-box-pack: center;
+				-ms-flex-pack: center;
+				justify-content: center;
+				font-size: 16px;
+				font-family: "Roboto Mono", sans-serif;
+				text-rendering: optimizeLegibility;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				-moz-font-feature-settings: "liga" on;
+				overflow: auto;
+			}
+			
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				color: blue-grey;
+				font-weight: 400;
+			}
+			
+			.centered-container {
+				background: #FFFFFF;
+				padding: 1rem 1.5rem;
+				border-radius: .125rem;
+				border: 1px solid rgba(0, 0, 0, 0.1);
+				box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.04);
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-flex: 0;
+				-ms-flex: 0 0 auto;
+				flex: 0 0 auto;
+				-webkit-box-orient: vertical;
+				-webkit-box-direction: normal;
+				-ms-flex-direction: column;
+				flex-direction: column;
+			}
+			
+			.actions {
+				width: 100%;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-orient: vertical;
+				-webkit-box-direction: normal;
+				-ms-flex-direction: column;
+				flex-direction: column;
+				-ms-flex-item-align: start;
+				align-self: flex-start;
+				margin: .25rem 0 1rem;
+			}
+			
+			.actions-title {
+				display: block;
+				width: 100%;
+				margin: 0 0 .25rem;
+				color: #777777;
+			}
+			
+			.actions-content {
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-orient: horizontal;
+				-webkit-box-direction: normal;
+				-ms-flex-direction: row;
+				flex-direction: row;
+			}
+			
+			.btn {
+				position: relative;
+				display: -webkit-inline-box;
+				display: -ms-inline-flexbox;
+				display: inline-flex;
+				-webkit-box-flex: 0;
+				-ms-flex: 0 0 auto;
+				flex: 0 0 auto;
+				-webkit-box-orient: horizontal;
+				-webkit-box-direction: normal;
+				-ms-flex-direction: row;
+				flex-direction: row;
+				-webkit-box-pack: center;
+				-ms-flex-pack: center;
+				justify-content: center;
+				-ms-flex-item-align: center;
+				align-self: center;
+				padding: 0 1.25rem;
+				line-height: 2.125rem;
+				font-size: .875rem;
+				font-weight: 400;
+				text-align: center;
+				margin: .125rem;
+				border-radius: .125rem;
+				border: 2px solid #3F4C5C;
+				background-color: #3F4C5C;
+				color: #FFFFFF;
+				text-decoration: none;
+				-webkit-transition: color .125s ease;
+				transition: color .125s ease;
+				overflow: hidden;
+				cursor: pointer;
+				vertical-align: middle;
+				outline: none;
+			}
+			
+			.btn:before {
+				background-color: #FFFFFF;
+				content: "";
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-transform: scaleY(0);
+				transform: scaleY(0);
+				-webkit-transition: -webkit-transform .25s ease;
+				transition: -webkit-transform .25s ease;
+				transition: transform .25s ease;
+				transition: transform .25s ease, -webkit-transform .25s ease;
+				-webkit-transform-origin: 50% 100%;
+				transform-origin: 50% 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				will-change: transform;
+				z-index: 0;
+			}
+			
+			.btn span {
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				position: relative;
+				z-index: 1;
+			}
+			
+			.btn .icon {
+				line-height: 2.125rem;
+				font-size: 1.25rem;
+				margin: 0 .25rem 0 -.25rem;
+			}
+			
+			.btn:hover,
+			.btn:active,
+			.btn:focus {
+				color: #3F4C5C;
+			}
+			
+			.btn:hover:before,
+			.btn:active:before,
+			.btn:focus:before {
+				-webkit-transform: scaleY(1);
+				transform: scaleY(1);
+			}
+			
+			.btn.block {
+				-ms-flex-item-align: stretch;
+				-ms-grid-row-align: stretch;
+				align-self: stretch;
+				width: 100%;
+				-webkit-box-flex: 1;
+				-ms-flex: 1 1 auto;
+				flex: 1 1 auto;
+			}
+			
+			.btn.bordered {
+				background-color: transparent !important;
+				color: #3F4C5C;
+			}
+			
+			.btn.bordered:before {
+				background-color: #3F4C5C;
+			}
+			
+			.btn.bordered:hover,
+			.btn.bordered:active,
+			.btn.bordered:focus {
+				color: #FFFFFF;
+			}
+			
+			.btn.rounded {
+				border-radius: 1.1875rem;
+			}
+			
+			.btn.hard {
+				border-radius: 0;
+			}
+			
+			.btn.blue {
+				background-color: #4793FF;
+				border-color: #4793FF;
+				color: #FFFFFF;
+			}
+			
+			.btn.blue:hover,
+			.btn.blue:active,
+			.btn.blue:focus {
+				color: #4793FF;
+			}
+			
+			.btn.blue.bordered {
+				color: #4793FF;
+			}
+			
+			.btn.blue.bordered:before {
+				background-color: #4793FF;
+			}
+			
+			.btn.blue.bordered:hover,
+			.btn.blue.bordered:active,
+			.btn.blue.bordered:focus {
+				color: #FFFFFF;
+			}
+			
+			.btn.green {
+				background-color: #29C672;
+				border-color: #29C672;
+			}
+			
+			.btn.green:hover,
+			.btn.green:active,
+			.btn.green:focus {
+				color: #29C672;
+			}
+			
+			.btn.green.bordered {
+				color: #29C672;
+			}
+			
+			.btn.green.bordered:before {
+				background-color: #29C672;
+			}
+			
+			.btn.green.bordered:hover,
+			.btn.green.bordered:active,
+			.btn.green.bordered:focus {
+				color: #FFFFFF;
+			}
+			
+			.btn.orange {
+				background-color: #FFAE47;
+				border-color: #FFAE47;
+			}
+			
+			.btn.orange:hover,
+			.btn.orange:active,
+			.btn.orange:focus {
+				color: #FFAE47;
+			}
+			
+			.btn.orange.bordered {
+				color: #FFAE47;
+			}
+			
+			.btn.orange.bordered:before {
+				background-color: #FFAE47;
+			}
+			
+			.btn.orange.bordered:hover,
+			.btn.orange.bordered:active,
+			.btn.orange.bordered:focus {
+				color: #FFFFFF;
+			}
+			
+			.btn.red {
+				background-color: #FF4747;
+				border-color: #FF4747;
+			}
+			
+			.btn.red:hover,
+			.btn.red:active,
+			.btn.red:focus {
+				color: #FF4747;
+			}
+			
+			.btn.red.bordered {
+				color: #FF4747;
+			}
+			
+			.btn.red.bordered:before {
+				background-color: #FF4747;
+			}
+			
+			.btn.red.bordered:hover,
+			.btn.red.bordered:active,
+			.btn.red.bordered:focus {
+				color: #FFFFFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="centered-container">
+			<div class="actions">
+				<div class="actions-title">Colors</div>
+				<div class="actions-content">
+					<a class="btn" href="#"><span>Button</span></a>
+					<a class="btn blue" href="#"><span>Button</span></a>
+					<a class="btn green" href="#"><span>Button</span></a>
+					<a class="btn orange" href="#"><span>Button</span></a>
+					<a class="btn red" href="#"><span>Button</span></a>
+				</div>
+			</div>
+			<div class="actions">
+				<div class="actions-title">Shapes</div>
+				<div class="actions-content">
+					<a class="btn" href="#"><span>Initial</span></a>
+					<a class="btn hard" href="#"><span>Hard</span></a>
+					<a class="btn rounded" href="#"><span>Rounded</span></a>
+				</div>
+			</div>
+			<div class="actions">
+				<div class="actions-title">Fills</div>
+				<div class="actions-content">
+					<a class="btn" href="#"><span>Initial</span></a>
+					<a class="btn bordered" href="#"><span>Bordered</span></a>
+				</div>
+			</div>
+			<div class="actions">
+				<div class="actions-title">Icons</div>
+				<div class="actions-content">
+					<a class="btn" href="#"><span>Initial</span></a>
+					<a class="btn bordered" href="#"><span class="icon material-icons">face</span><span>Icon</span></a>
+				</div>
+			</div>
+			<div class="actions">
+				<div class="actions-title">Displays</div>
+				<div class="actions-content">
+					<a class="btn" href="#"><span>Initial</span></a>
+					<a class="btn block" href="#"><span>Block</span></a>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
